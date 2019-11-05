@@ -1,13 +1,12 @@
 <template>
-	<div>profile</div>
+<div>profile</div>
 </template>
 
 <script>
-	export default{
+export default{
 
-	}
+}
 </script>
 
-<style scoped>
-	
+<style scoped>	
 </style>
