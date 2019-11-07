@@ -3,7 +3,9 @@ import Vue from 'vue'
 import {
 	REQ_NOWMOVIES,
 	REQ_COMINGMOVIES,
-	REQ_TOP250
+	REQ_TOP250,
+	REQ_MORETITLE,
+	CLEAR
 } from './mutations-types'
 
 export default{
@@ -18,5 +20,13 @@ export default{
 	[REQ_TOP250](state,{topMovies}){
 		state.topMovies=topMovies.subjects
         state.topTitle=topMovies.title
+	},
+	[REQ_MORETITLE](state,{title}){
+		console.log(title)
+		state.moreTitle=title
+	},
+	[CLEAR](state){
+		console.log('kkk')
+        state.moreTitle=''
 	}
 }

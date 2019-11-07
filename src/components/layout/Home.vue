@@ -1,31 +1,22 @@
 <template>
  <div class="layout">
         <Layout>
-            <Header :style="{position: 'fixed', width: '100%',top:'0px'}">
+            <Header :style="{position: 'fixed', width: '100%',top:'0px',zIndex:'200'}">
                 <Menu mode="horizontal" active-name="1" :style="{background:'#ccc'}">
                     <div class="layout-nav">
                         <MenuItem name="1" class="menu-item">
-                         <router-link :to="{path:'/homepage'}" exact> 
-                         	<Icon type="ios-navigate"></Icon>
-                            电影
-                        </router-link>   
+ <router-link :to="{path:'/homepage'}"exact><Icon type="ios-navigate"></Icon>电影</router-link>   
                         </MenuItem>
-                        <MenuItem name="2" class="menu-item"  exact>
-                        	 <router-link :to="{path:'/search'}"> 
-                            <Icon type="ios-keypad"></Icon>
-                            搜索
-                             </router-link>
+                        <MenuItem name="2" class="menu-item">
+<router-link :to="{path:'/search'}"exact> <Icon type="ios-keypad"></Icon>搜索</router-link>
                         </MenuItem>
-                        <MenuItem name="3" class="menu-item"  exact>
-                        	 <router-link :to="{path:'/profile'}"> 
-                            <Icon type="ios-analytics"></Icon>
-                            我的
-                             </router-link>
+                        <MenuItem name="3" class="menu-item">
+<router-link :to="{path:'/profile'}"exact><Icon type="ios-analytics"></Icon>我的</router-link>
                         </MenuItem>
                     </div>
                 </Menu>
             </Header>
-            <Content :style="{margin: '10px 20px', background: '#fff', minHeight: '100%'}">
+            <Content :style="{margin: '10px 20px', background: '#fff', height: '100%',position:'relative'}">
                 <router-view/>
             </Content>
             <Footer class="layout-footer-center">推荐使用Chrome浏览器浏览</Footer>
@@ -34,10 +25,10 @@
 </template>
 
 <script>
-window.onload=function(){
-	var menuItem=document.getElementsByClassName("menu-item")
-	for(var i=0;i<menuItem.length;i++){
-		menuItem[i].onmouseenter=function(){
+window.onload= function(){
+  var menuItem= document.getElementsByClassName('menu-item')
+	for (var i=0;i< menuItem.length;i++) {
+		menuItem[i].onmouseenter=function (){
 			this.style.fontSize='26px'
 		}
 		menuItem[i].onmouseleave=function(){
@@ -48,7 +39,6 @@ window.onload=function(){
 export default {
     methods:{
     	goTo(path){
-    		console.log('--------')
     		this.$route.replace(path)
     	}
     }

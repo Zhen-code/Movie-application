@@ -5,11 +5,10 @@
 </template>
 
 <script>
-import Vue from "vue"
 import Home from './components/layout/Home.vue'
 export default {
   name: 'App',
-  components:{
+  components: {
     Home
   }
 }

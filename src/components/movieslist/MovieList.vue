@@ -2,7 +2,7 @@
 	<div>
 	 <div class="header">
     <span class="title" :style="color">{{this.title}}</span>
-    <span class="all-movie" :style="color">全部&gt;</span>
+    <a class="all-movie" :style="color" @click="toMore(title)">全部&gt;</a>
   </div>
     <div v-if="this.movies.length" >
       <b-row class="bv-example-row">
@@ -24,12 +24,13 @@
       </b-row>
     </div>
     <div v-else>
-      <h5>No meals available yet 😢</h5>
+      <h5>获取当前电影列表失败</h5>
     </div>
 </div>
 </template>
 
 <script>
+import PubSub from 'pubsub-js'
 	export default{
 		props:{
 			movies:Array,
@@ -43,6 +44,11 @@
 				}
 			}
 		},
+    methods:{
+      toMore(title){
+         this.$router.push({path:'/morelist',query:{name:title}})
+      }
+    },
     mounted(){
     var cardbody=document.getElementsByClassName('card-body')
       for(var i=0;i<cardbody.length;i++){
@@ -53,8 +59,8 @@
         this.style.background = '#fff'
       }
     }
+      this.$store.dispatch('getNowTitle',this.title)
     }
-  
   }
 </script>
 

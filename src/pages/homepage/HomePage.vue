@@ -1,9 +1,14 @@
 <template>
-<b-container>
+  <div>
+<b-container v-if="this.$route.fullPath=='/homepage'">
   <MovieList :title="this.nowTitle" :movies="this.nowMovies" titleColor="red"/>
   <MovieList :title="this.commingTitle" :movies="this.commingMovies" titleColor="green"/>
   <MovieList :title="this.topTitle" :movies="this.topMovies" titleColor="blue"/>
   </b-container>
+   <router-view></router-view>
+  </div>
+ 
+
 </template>
 
 <script>
