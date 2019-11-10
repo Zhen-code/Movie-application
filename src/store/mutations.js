@@ -5,7 +5,8 @@ import {
 	REQ_COMINGMOVIES,
 	REQ_TOP250,
 	REQ_MORETITLE,
-	CLEAR
+	CLEAR,
+	SETUSER
 } from './mutations-types'
 
 export default{
@@ -28,5 +29,8 @@ export default{
 	[CLEAR](state){
 		console.log('kkk')
         state.moreTitle=''
+	},
+	[SETUSER](state,{userId}){
+		state.userId=userId
 	}
 }

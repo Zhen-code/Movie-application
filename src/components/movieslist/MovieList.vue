@@ -17,7 +17,7 @@
               style="max-width:10rem;"
               class="mb-2">
               <b-card-text>{{data.rating.average==0?'':data.rating.average}}</b-card-text>
-              <b-button href="#" class="goBuy">购票</b-button>
+              <b-button variant="success" class="gobuy" >订票</b-button>
             </b-card>
           </b-col>
         </div>
@@ -53,7 +53,7 @@ import PubSub from 'pubsub-js'
     var cardbody=document.getElementsByClassName('card-body')
       for(var i=0;i<cardbody.length;i++){
       cardbody[i].onmouseenter=function(){
-        this.style.background = 'red'
+        this.style.background = 'orange'
       }
       cardbody[i].onmouseleave=function(){
         this.style.background = '#fff'
@@ -88,7 +88,7 @@ import PubSub from 'pubsub-js'
 .card-body{
   height: 30px;
 }
-.goBuy{
-  background:none;border: none;color:orange;position: absolute;top: 80%;left: 30%;
+.gobuy{
+  position: absolute;top: 84%;left: 30%;height:30px;font-size: 16px;line-height: 15px;
 }
 </style>

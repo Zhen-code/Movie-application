@@ -1,4 +1,4 @@
-import {REQ_NOWMOVIES,REQ_COMINGMOVIES, REQ_TOP250,REQ_MORETITLE,CLEAR} from './mutations-types'
+import {REQ_NOWMOVIES,REQ_COMINGMOVIES, REQ_TOP250,REQ_MORETITLE,CLEAR,SETUSER} from './mutations-types'
 // 导入url常量参数
 import {url, comingurl, topurl, apikey, start, count} from '../utils/constant'
 // 导入jsonp接口
@@ -31,5 +31,8 @@ export default{
 	getClearTitle({commit}){
 		console.log('oooo')
 		commit(CLEAR)
+	},
+	setUserId({commit},userId){
+		commit(SETUSER,{userId})
 	}
 }

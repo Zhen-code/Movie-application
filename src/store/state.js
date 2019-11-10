@@ -5,5 +5,6 @@ export default {
 	commingTitle:'',
 	topMovies:[],
 	topTitle:'',
-	moreTitle:''
+	moreTitle:'',
+	userId:''
 }
