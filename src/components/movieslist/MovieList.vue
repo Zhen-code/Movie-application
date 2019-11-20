@@ -6,7 +6,7 @@
   </div>
     <div v-if="this.movies.length" >
       <b-row class="bv-example-row">
-        <div v-for="data in movies" v-bind:key="data.index">
+        <div v-for="(data,index) in movies" v-bind:key="data.index">
           <b-col>
             <b-card
               v-bind:title="data.title"
@@ -17,7 +17,7 @@
               style="max-width:10rem;"
               class="mb-2">
               <b-card-text>{{data.rating.average==0?'':data.rating.average}}</b-card-text>
-              <b-button variant="success" class="gobuy" >订票</b-button>
+              <b-button variant="success" class="gobuy" @click="goBuy(data)">订票</b-button>
             </b-card>
           </b-col>
         </div>
@@ -31,6 +31,7 @@
 
 <script>
 import PubSub from 'pubsub-js'
+import {reqAddOrder} from '../../api'
 	export default{
 		props:{
 			movies:Array,
@@ -45,8 +46,26 @@ import PubSub from 'pubsub-js'
 			}
 		},
     methods:{
+      // 跳转到更多界面
       toMore(title){
          this.$router.push({path:'/morelist',query:{name:title}})
+      },
+      async goBuy(data){
+       const userId=this.$store.state.userId
+       if(userId==''){
+        console.log('未登录')
+       }else{
+        const filmname=data.title
+        const filmid=data.id
+        const num=1
+        const price=20
+        const result=await reqAddOrder(userId,filmname,filmid,num,price)
+        if(result.code==0){
+          console.log('添加成功');
+        }else{
+          console.log('添加失败');
+        }
+       }
       }
     },
     mounted(){

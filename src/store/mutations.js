@@ -6,7 +6,8 @@ import {
 	REQ_TOP250,
 	REQ_MORETITLE,
 	CLEAR,
-	SETUSER
+	SETUSER,
+	CLEARUSER
 } from './mutations-types'
 
 export default{
@@ -32,5 +33,8 @@ export default{
 	},
 	[SETUSER](state,{userId}){
 		state.userId=userId
+	},
+	[CLEARUSER](state){
+		state.userId=''
 	}
 }

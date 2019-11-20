@@ -4,20 +4,22 @@
             <Header :style="{position: 'fixed', width: '100%',top:'0px',zIndex:'200'}">
                 <Menu mode="horizontal" active-name="1" :style="{background:'#ccc'}">
                     <div class="layout-nav">
-                        <MenuItem name="1" class="menu-item">
- <router-link :to="{path:'/homepage'}"exact><Icon type="ios-navigate"></Icon>电影</router-link>   
+                        <MenuItem name="1" class="menu-item" >
+ <router-link :to="{path:'/homepage'}"><Icon type="ios-navigate"></Icon>电影</router-link>   
                         </MenuItem>
                         <MenuItem name="2" class="menu-item">
-<router-link :to="{path:'/search'}"exact> <Icon type="ios-keypad"></Icon>搜索</router-link>
+<router-link :to="{path:'/search'}"> <Icon type="ios-keypad"></Icon>搜索</router-link>
                         </MenuItem>
                         <MenuItem name="3" class="menu-item">
-<router-link :to="{path:'/profile'}"exact><Icon type="ios-analytics"></Icon>我的</router-link>
+<router-link :to="{path:'/profile'}"><span :class="{active:flag}"><Icon type="ios-analytics"></Icon>我的</span></router-link>
                         </MenuItem>
                     </div>
                 </Menu>
             </Header>
-            <Content :style="{margin: '10px 20px', background: '#fff', height: '100%',position:'relative'}">
+            <Content :style="{margin: '10px 20px', background: '#fff', height: '100%',position:'relative',width:'100%'}">
+                <transition name="fade" mode="out-in">
                 <router-view/>
+            </transition>
             </Content>
             <Footer class="layout-footer-center">推荐使用Chrome浏览器浏览</Footer>
         </Layout>
@@ -26,6 +28,7 @@
 
 <script>
 window.onload= function(){
+    // 增加样式
   var menuItem= document.getElementsByClassName('menu-item')
 	for (var i=0;i< menuItem.length;i++) {
 		menuItem[i].onmouseenter=function (){
@@ -37,15 +40,27 @@ window.onload= function(){
 	}
 }
 export default {
+    data(){
+        return{
+            flag:false
+        }
+    },
     methods:{
-    	goTo(path){
-    		this.$route.replace(path)
-    	}
+        // 跳转替换当前导航栏url
+    	// goTo(path){
+    	// 	this.$route.replace(path)
+    	// }
+    },
+    mounted(){
+        
     }
 }
 </script>
 
 <style scoped>
+.active{
+    color: black;
+}
 .layout{
         border: 1px solid #d7dde4;
         background: #f5f7f9;
@@ -83,7 +98,13 @@ export default {
     .layout-footer-center{
         text-align: center;
     }
-    .active{
+    .router-link-active{
     	color: black;
+    }
+    .fade-enter, .fade-leave{
+        opacity: 0
+    }
+    .fade-enter-active, .fade-leave-active{
+        transition: opacity .3s ease;
     }
 </style>

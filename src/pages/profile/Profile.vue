@@ -14,7 +14,7 @@
 			  </div>
 		   </div>
 		   <div class="left-side-forget">
-			  <input type="checkbox" class="checked">
+			  <input type="checkbox" class="checked" ref="check">
 			  <span class="remenber-me">保存用户信息</span>
 		   </div>
 		   <div class="right-side-forget">
@@ -27,7 +27,7 @@
 		</form>
 		<div class="w3layouts_more-buttn">
 		   <h3>Don't Have an account..?
-			  <a href="#content1">注册
+			  <a href="#content1" @click="reg">注册
 			  </a>
 		   </h3>
 		</div>
@@ -42,6 +42,7 @@
 <script>
 import {reqlogin} from '../../api'
 import storage from '../../utils/storage'
+import session from '../../utils/sessionStorage'
 import MyInfo from '../info/MyInfo.vue'
 export default{
 	data(){
@@ -53,34 +54,51 @@ export default{
 	},
 	methods:{
    			async login(){
+   				// 获取文本框输入的用户名与密码
    				let username=this.username
    				let password=this.password
+   				// 请求后台接口登录
    				const result=await reqlogin(username,password)
    				if(result.code==0){
+   					// 获取用户信息
    				let	_id=result.data._id
  				let username=result.data.username
  				let password=result.data.password
+ 				// 判断是否保存用户信息
+ 				if(this.$refs.check.checked){
+ 				// 设置用户信息localstorage存储
  				storage.set('username',{_id,username,password})
+ 				}
+ 				//存储信息到session
+ 				session.set('userinfo',{_id,username,password})
+ 				// 存储信息到vuex
  				this.$store.dispatch('setUserId',_id)
- 				this.$router.push('/profile/info')
+ 				this.flag=false
    				}else{
    					console.log('登录失败')
    				}
    			},
+   			reg(){
+
+   			}
 	},
 	components:{
 		MyInfo
 	},
+	beforeMount(){
+		
+	},
     mounted(){
-    	addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); 
-    	function hideURLbar() { window.scrollTo(0, 1); };
-    	if(this.$store.state.userId!==''){
-              this.flag=false
+    	// 获取本地用户信息或vuex是否存在
+    	const user=storage.get('username')
+    	const userId=this.$store.state.userId
+    	if(user||userId){
+    		this.flag=false
     	}else{
     		this.flag=true
     	}
-
     }
+
 }
 </script>
 

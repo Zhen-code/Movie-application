@@ -23,6 +23,7 @@
               class="mb-3">
               <b-card-text>{{data.rating.average==0?'':data.rating.average}}</b-card-text>
             </b-card>
+            <Button id="detail-btn" @click="godetail(data)">详情</Button>
           </b-col>
         </div>
         </b-row>
@@ -66,6 +67,9 @@ export default{
     }
   },
   methods:{
+    godetail(data){
+      this.$router.push({path:'/detail',query:{detail:data}})
+    },
     goback(){
       this.$router.go(-1)
     },
@@ -96,7 +100,7 @@ async getNext(done){
   this.items=arr1
   this.start=start
   // 刷新后停止读取
-   this.$refs.myscroller.finishPullToRefresh();
+   // this.$refs.myscroller.finishPullToRefresh();
    // 结束上拉回调
    done()
 }
@@ -136,20 +140,24 @@ async getNext(done){
   height: 200px;
 }
 .card-title{
-  color: #fff;position: absolute;top: 66%;left: 0;text-align: left;line-height: 30px;
+  color: #fff;position: absolute;top:-30px;left: 0;text-align: left;line-height: 30px;
   font-size: 16px;width: 100%;height: 30px;background-color: rgba(0,0,0,.6);font-weight: bold;
 }
 .card-text{
   position: absolute;color: orange;font-size: 16px;font-style: italic;font-weight: bold;
-  top: 70%;right: 6px;
+  top:-30px;right: 6px;
 }
 .all-movie{
   position: absolute;left: 75%;line-height: 45px;
 }
 .card-body{
-  height: 30px;
+  height: 32px;position: relative;
 }
 .b-row{
   position: relative;height:600px;margin-top: 100px;
 }
+#detail-btn{
+  width: 60px;height: 26px;
+  color: green;font-weight: bold;position: absolute;
+  top: 85%;left: 70px;}
 </style>

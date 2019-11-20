@@ -7,6 +7,7 @@ import Search from '../pages/search/Search.vue'
 import MoreList from '../pages/morelist/MoreList.vue'
 import MyInfo from '../pages/info/MyInfo.vue'
 import NotFound from '../components/404/NotFound.vue'
+import FilmDetail from '../pages/filmdetail/FilmDetail.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,14 +21,11 @@ export default new Router({
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile,
-      children:[
-      {
-      path:'info',
-      name: MyInfo,
+      component: Profile
+    },
+    {
+      path:'/profile/info',
       component: MyInfo
-      },
-      ]
     },
     {
       path: '/search',
@@ -42,6 +40,15 @@ export default new Router({
     {
       path: '/',
       redirect: '/homepage'
+    },
+    {
+      path:'/detail',
+      name:FilmDetail,
+      component:FilmDetail
+    },
+    {
+      path:'*',
+      redirect: '/notfound'
     }
   ]
 })

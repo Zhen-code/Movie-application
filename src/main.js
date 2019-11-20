@@ -7,13 +7,14 @@ import VueResource from 'vue-resource'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Router from 'vue-router'
 import router from './router'
 import store from './store'
 import Promise from 'promise-polyfill'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import '../static/custom.css'
-import { Button, Table, Layout, MenuItem, Icon, Sider, Submenu, BreadcrumbItem, Input, List} from 'view-design'
+import { Button, Table, Layout, MenuItem, Icon, Sider, Submenu, BreadcrumbItem, Input, List,Modal} from 'view-design'
 Vue.use('ViewUI')
 Vue.use(BootstrapVue)
 Vue.use(VueResource)
@@ -26,10 +27,15 @@ Vue.component('Sider', Sider)
 Vue.component('Submenu', Submenu)
 Vue.component('BreadcrumbItem', BreadcrumbItem)
 Vue.component('Input', Input)
+Vue.component('Modal',Modal)
 Vue.component('List', List)
 Vue.component('ListItem',List.ListItem)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 new Vue({
   el: '#app',
   router,
